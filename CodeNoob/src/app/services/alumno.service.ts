@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Alumnos } from '../models/alumnos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AlumnoService {
 
     let params = JSON.stringify(alumno);
 
-    return this._http.post(this.url + '/loginAlumno',params,{headers:this.headersVariable});
+    return this._http.post(this.url + '/login',params,{headers:this.headersVariable});
 
   }
 
@@ -47,5 +48,10 @@ export class AlumnoService {
     }
 
     return this.identidad;
+  }
+
+  registrarAlumno(modeloAlumno: Alumnos): Observable<any> {
+    let parametros = JSON.stringify(modeloAlumno);
+    return this._http.post(this.url + '/registrarAlumno', parametros, { headers: this.headersVariable })
   }
 }

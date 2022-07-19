@@ -12,6 +12,7 @@ import { EleccionRegistroComponent } from './components/eleccion-registro/elecci
 import { LoginProfesorComponent } from './components/login-profesor/login-profesor.component';
 import { LoginAlumnoComponent } from './components/login-alumno/login-alumno.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistroProfesorComponent } from './components/registro-profesor/registro-profesor.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegistroAlumnoComponent,
     EleccionRegistroComponent,
     LoginProfesorComponent,
-    LoginAlumnoComponent
+    LoginAlumnoComponent,
+    RegistroProfesorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Profesores } from '../models/profesores.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,10 @@ obtenerIdentidad(){
   }
 
   return this.identidad;
+}
+
+registrarProfe(modeloProfe: Profesores): Observable<any> {
+  let parametros = JSON.stringify(modeloProfe);
+  return this._http.post(this.url + '/registrarProfesor', parametros, { headers: this.headersVariable })
 }
 }
