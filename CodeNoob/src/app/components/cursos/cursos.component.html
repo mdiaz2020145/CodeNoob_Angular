@@ -1,0 +1,97 @@
+<section style="margin-top: 100px">
+  <section class="container-fluid bg-transparent my-4 p-3" style="position: relative;">
+    <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_PROFESOR'">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar
+      </button>
+
+    </div>
+  </section>
+</section>
+
+<main>
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      <div class="col" *ngFor="let curso of cursoModelGet">
+        <div class="card h-100 shadow-sm">
+          <a class="text-center mt-2" data-flickr-embed="true"
+            href="https://www.flickr.com/photos/bodyburn/2318667260/in/photolist-4wTLZJ-29eY1Aq-2a7uHnH-7xVz5g-MZ1z1W-7xZoYQ-27zENmG-27zEME1-27zEMcC-Lzu2Ya-27zEN4h-Lzu2Hv-29eY2km-WFvsAJ-Lzu2Qz-2a7uHJ4-29eY1Jm-kvMEPT-piU88J-4bbw9U-2a7uHAP-4b7vkX-27zEM2h-5wi6Kq-MZ1yHm-5wi6SC-atJARU-dfpDAd-paMN8T-8MMk9U-dfpG98-aga39L-axeNnc-28Jq5oe-dfpRbi-dfpNfB-aoBXn8-p4riZL-9KemFa-dfpK9n-o8CSeG-nRhkEq-27zENcy-29eY1Xh-bL77G4-7vvpvW-27zEMvU-8MJfwZ-4bbw6C-27zEMLU"
+            title="Curso BodyBurn"><img src="https://live.staticflickr.com/3203/2318667260_b39db3ed44_m.jpg" width="160"
+              height="240" alt="Curso BodyBurn"></a>
+          <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+          <div class="card-body">
+            <!-- <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span> <span
+                 class="float-end price-hp">12354.00&euro;</span> </div> -->
+            <h4 class="card-title text-center" style="font-size: 30px;">{{curso.nombreCurso}}</h4>
+            <p class="card-text text-justify">{{curso.descripcion}}</p>
+            <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_ALUMNO'"> <a href="#"
+                class="btn btn-success">Asignarse</a></div>
+            <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_PROFESOR'">
+              <a class="btn btn-warning m-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                aria-controls="offcanvasExample" (click)="obtenerCursoId(curso._id)">Editar</a>
+              <a class="btn btn-danger m-1" (click)="eliminarCurso(curso._id)">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Curso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" ngNativeValidate>
+          <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre del curso</label>
+            <input type="text" class="form-control" id="inputNombre" name="nombreCurso" #nombreCurso="ngModel"
+              [(ngModel)]="cursoModelPost.nombreCurso" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputDesc" class="form-label">Descripcion del curso</label>
+            <input type="text" class="form-control" id="inputDesc" name="descripcion" #descripcion="ngModel"
+              [(ngModel)]="cursoModelPost.descripcion">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="agregarCurso()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Off canvas editar -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Curso</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="form-group" ngNativeValidate>
+      <div class="mb-3">
+        <label for="inputNombre" class="form-label">Nombre del curso</label>
+        <input type="text" class="form-control" id="inputNombre" name="nombreCurso" #nombreCurso="ngModel"
+          [(ngModel)]="cursoModelGetId.nombreCurso" required>
+      </div>
+      <div class="mb-3">
+        <label for="inputDesc" class="form-label">Descripcion del curso</label>
+        <input type="text" class="form-control" id="inputDesc" name="descripcion" #descripcion="ngModel"
+          [(ngModel)]="cursoModelGetId.descripcion">
+      </div>
+    </form>
+    <div>
+      <button type="button" class="btn btn-danger mx-1" data-bs-dismiss="offcanvas">Cancelar</button>
+      <button type="button" class="btn btn-success " data-bs-dismiss="offcanvas" (click)="editarCurso()">Guardar</button>
+    </div>
+  </div>
+</div>
