@@ -8,16 +8,20 @@ import { EleccionRegistroComponent } from './components/eleccion-registro/elecci
 import { LoginProfesorComponent } from './components/login-profesor/login-profesor.component';
 import { LoginAlumnoComponent } from './components/login-alumno/login-alumno.component';
 import { CursosComponent } from './components/cursos/cursos.component';
+import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
+import { PreguntasComponent } from './components/preguntas/preguntas.component';
 
 const routes: Routes = [
-  {path:"bienvenida",component:BienvenidaComponent},
-  {path:"eleccionLogin", component:EleccionLoginComponent},
-  {path:"eleccionRegistro", component:EleccionRegistroComponent},
-  {path:"registraAlumno", component:RegistroAlumnoComponent},
-  {path:"registrarProfe", component:RegistroProfesorComponent},
-  {path:"loginProfesor", component:LoginProfesorComponent},
-  {path:"loginAlumno", component:LoginAlumnoComponent},
-  {path: "cursos", component:CursosComponent},
+  { path: "bienvenida", component: BienvenidaComponent },
+  { path: "eleccionLogin", component: EleccionLoginComponent },
+  { path: "eleccionRegistro", component: EleccionRegistroComponent },
+  { path: "registraAlumno", component: RegistroAlumnoComponent },
+  { path: "registrarProfe", component: RegistroProfesorComponent },
+  { path: "loginProfesor", component: LoginProfesorComponent },
+  { path: "loginAlumno", component: LoginAlumnoComponent },
+  { path: "cursos", component: CursosComponent },
+  { path: "cuestionario", component: CuestionarioComponent },
+  { path: "preguntas/:idCuestionario", component: PreguntasComponent }
 ];
 
 @NgModule({

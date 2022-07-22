@@ -1,0 +1,120 @@
+<br><br> <br> <br>
+
+<!-- Button trigger modal -->
+<div class="container mb-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    (click)="listarCursos()">
+    Agregar cuestionario
+  </button>
+</div>
+
+<!-- off canvas -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar cuestionario</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombre" class="form-label">Nombre del cuestionario</label>
+        <input type="text" class="form-control" id="inputNombre" name="nombreCuestionario" #nombreCuestionario="ngModel"
+          [(ngModel)]="cuestionarioModelPut.nombreCuestionario" required>
+      </div>
+      <div class="mb-3">
+        <label for="inputDesc" class="form-label">Numero de leccion</label>
+        <input type="number" class="form-control" id="inputDesc" name="numeroLeccion" #numeroLeccion="ngModel"
+          [(ngModel)]="cuestionarioModelPut.numeroLeccion">
+      </div>
+    </form>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas">Cerrar</button>
+    <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" (click)="putCuestionario()">Editar</button>
+  </div>
+</div>
+
+<!-- nueva card -->
+<div class="container">
+  <div class="row" *ngIf="validation == true">
+    <div class="col col-md-6" *ngFor="let cuestionario  of cuestionarioModelGetId ">
+      <div class="example-1 card" >
+        <div class="wrapper" >
+          <div class="date">
+            <span class="day">No.</span>
+            <span class="month">{{cuestionario.numeroLeccion}}</span>
+          </div>
+          <div class="data">
+            <div class="content">
+              <h1 class="title"><a href="#">{{cuestionario.nombreCuestionario}}</a></h1>
+              <p class="text">
+                Punteo leccion: {{cuestionario.total}}
+              </p>
+              <ul>
+                <li>
+                  <button class="btn btn-danger m-1 size" (click)="deleteCuestionario(cuestionario._id)"> Eliminar</button>
+                </li>
+                <li>
+                  <button class="btn btn-warning m-1 size" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                    aria-controls="offcanvasExample" (click)="listarCuestionarioPut(cuestionario._id)">
+                    Editar
+                  </button>
+                </li>
+                <li><button class="btn btn-info m-1 size" [routerLink]="['/preguntas',cuestionario._id]">Preguntas</button></li>
+              </ul>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="container mt-4" *ngIf="validation == false">
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">¡Lo sentimos!</h4>
+    <p>Al parecer no hay cuestionarios que visualizar en este momento, ¡Por favor revisa mas tarde!</p>
+    <hr>
+    <p class="mb-0" *ngIf="_cuestionarioService.obtenerIdentidad().rol === 'ROL_PROFESOR'">O ¡Puedes agregar un nuevo
+      Cuestionario!</p>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Datos cuestionario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="getCuestionariosID()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="agregarCuestionario(); agregarCuest.reset()" #agregarCuest="ngForm" ngNativeValidate>
+          <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre del cuestionario</label>
+            <input type="text" class="form-control" id="inputNombre" name="nombreCuestionario"
+              #nombreCuestionario="ngModel" [(ngModel)]="cuestionarioModelPost.nombreCuestionario" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputDesc" class="form-label">Numero de leccion</label>
+            <input type="number" class="form-control" id="inputDesc" name="numeroLeccion" #numeroLeccion="ngModel"
+              [(ngModel)]="cuestionarioModelPost.numeroLeccion">
+          </div>
+          <div class="mb-3">
+            <label for="inputDesc" class="form-label">Nombre curso:</label>
+            <select class="form-select" aria-label="Default select example" name="nombreCurso" #nombreCurso="ngModel"
+              [(ngModel)]="cuestionarioModelPost.nombreCurso" required>
+              <option selected>Selecione --</option>
+              <option *ngFor="let cursos  of cursoModelGet" [value]="cursos.nombreCurso">
+                {{cursos.nombreCurso}}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="getCuestionariosID()">Cerrar</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

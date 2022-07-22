@@ -1,0 +1,135 @@
+<br><br> <br> <br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Agregar Pregunta
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingreso preguntas:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <form (ngSubmit)="postPregunta(); agregarPregunta.reset()" #agregarPregunta="ngForm">
+            <div class="mb-3">
+              <label for="inputNombre" class="form-label">Pregunta:</label>
+              <input type="text" class="form-control" id="inputNombre" name="pregunta" #pregunta="ngModel"
+                [(ngModel)]="preguntasPost.pregunta" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputDesc" class="form-label">Repuesta:</label>
+              <input type="text" class="form-control" id="inputDesc" name="respuesta" #respuesta="ngModel"
+                [(ngModel)]="preguntasPost.respuesta">
+            </div>
+            <div class="mb-3">
+              <label for="inputDesc" class="form-label">Puntos pregunta:</label>
+              <input type="number" class="form-control" id="inputDesc" name="puntosPregunta" #puntosPregunta="ngModel"
+                [(ngModel)]="preguntasPost.puntosPregunta">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Agregar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- card -->
+<div class="formulario" *ngIf="validation == true">
+  <div class="wrapper">
+    <div class="logo">
+      <img src="../../../assets/images/CodeNoob.jpeg" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+      {{cuestionarioModelPut.nombreCuestionario}}
+    </div>
+    <form class="p-3 mt-3">
+      <div *ngFor="let preguntas  of cuestionarioModelPut.items">
+        <div class="mt-4 letra">
+          Pregunta:
+        </div>
+        <div class="formfield d-flex align-items-center">
+          <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="buscarPreguntaId(preguntas._id, preguntas.pregunta)"><span class="fa-solid fa-pen-to-square agrandar"></span></button>
+          <Label>{{preguntas.pregunta}}</Label>
+        </div>
+        <div class="mt-4 letra">
+          Respuesta:
+        </div>
+        <div class="formfield d-flex align-items-center">
+          <label>{{preguntas.respuesta}}</label>
+        </div>
+      </div>
+      <button class="boton mt-3" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Eliminar</button>
+    </form>
+  </div>
+</div>
+
+<section class="container mt-4" *ngIf="validation == false">
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">¡Lo sentimos!</h4>
+    <p>Al parecer no hay preguntas que visualizar en este momento, ¡Por favor revisa mas tarde!</p>
+    <hr>
+    <p class="mb-0" *ngIf="_cuestionarioService.obtenerIdentidad().rol === 'ROL_PROFESOR'">O ¡Puedes agregar una nueva
+      pregunta!</p>
+  </div>
+</section>
+
+
+<!-- modal eliminar -->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Eliminar pregunta</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form #selectPreguntas = "ngForm">
+      <label class="mt-3">Pregunta a eliminar</label>
+      <select class="form-select mt-3" aria-label="Default select example" name="pregunta" #pregunta="ngModel"
+              [(ngModel)]="preguntasDelete.pregunta">
+        <option selected>Seleccionar --</option>
+        <option *ngFor="let preguntas of cuestionarioModelPut.items" [value]="preguntas.pregunta">{{preguntas.pregunta}}</option>
+      </select>
+    </form>
+    <button class="btn btn-warning mt-3" data-bs-dismiss="offcanvas">Cerrar</button>
+    <button class="btn btn-danger mt-3" data-bs-dismiss="offcanvas" (click)="deletePregunta()">Eliminar</button>
+  </div>
+</div>
+
+<!-- modela editar -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar pregunta</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombre" class="form-label">Pregunta</label>
+        <input type="text" class="form-control" id="inputNombre" name="pregunta" #pregunta="ngModel"
+          [(ngModel)]="preguntasGet.pregunta" required>
+      </div>
+      <div class="mb-3">
+        <label for="inputDesc" class="form-label">Respueta</label>
+        <input type="text" class="form-control" id="inputDesc" name="repuesta" #respuesta="ngModel"
+          [(ngModel)]="preguntasGet.respuesta">
+      </div>
+      <div class="mb-3">
+        <label for="inputDesc" class="form-label">Repuesta puntos:</label>
+        <input type="number" class="form-control" id="inputDesc" name="puntosPregunta" #puntosPregunta="ngModel"
+          [(ngModel)]="preguntasGet.puntosPregunta">
+      </div>
+      <button class="btn btn-danger" data-bs-dismiss="offcanvas">Cerrar</button>
+      <button class="btn btn-success" data-bs-dismiss="offcanvas" (click)="putPregunta()">Editar</button>
+    </form>
+  </div>
+</div>
+
+
