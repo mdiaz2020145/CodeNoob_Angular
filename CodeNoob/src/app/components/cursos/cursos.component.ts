@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cursos } from 'src/app/models/cursos.model';
+import { Asignacion } from 'src/app/models/asignacion.model';
 import { CursosService } from 'src/app/services/cursos.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CursosComponent implements OnInit {
   public cursoModelGet: Cursos;
   public cursoModelGetId: Cursos;
   public cursoModelPost: Cursos;
+  public asignacionModelPost:Asignacion;
   public token: any;
   public validation: Boolean = true;
 
@@ -22,6 +24,7 @@ export class CursosComponent implements OnInit {
   constructor(public _cursosService: CursosService) {
     this.cursoModelGetId = new Cursos('', '', '', '')
     this.cursoModelPost = new Cursos('', '', '', '')
+    this.asignacionModelPost = new Asignacion('','','')
     this.token = _cursosService.obtenerToken();
   }
 
@@ -78,6 +81,14 @@ export class CursosComponent implements OnInit {
         this.cursoModelGetId = response.Curso
       },
       error: (err: any)=>{ console.log(err) }
+    })
+  }
+
+  asignacion(nombreCurso){
+    this._cursosService.asignarCurso(nombreCurso,this.token).subscribe({
+      next:(response)=>{
+      },
+      error:(err:any)=>{console.log(err)}
     })
   }
 }

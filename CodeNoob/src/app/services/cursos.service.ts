@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cursos } from '../models/cursos.model';
+import { Asignacion } from '../models/asignacion.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -63,6 +64,11 @@ export class CursosService {
   eliminarCurso(idCurso: String, token: any): Observable<any> {
     let headersToken = this.headersVariable.set('Authorization', token)
     return this._http.delete(this.url + "/eliminarCurso/" + idCurso, { headers: headersToken })
+  }
+
+  asignarCurso(nombreCurso:String,token:any):Observable<any>{
+    let headersToken = this.headersVariable.set('Authorization', token)
+    return this._http.post(this.url + '/asignacionCurso/'+nombreCurso,{headers:headersToken})
   }
 
 
