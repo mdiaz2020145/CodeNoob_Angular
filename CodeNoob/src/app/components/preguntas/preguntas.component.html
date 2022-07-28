@@ -1,8 +1,10 @@
 <br><br> <br> <br>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Agregar Pregunta
-</button>
+<div class="container mb-3">
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Agregar Pregunta
+  </button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -46,7 +48,7 @@
       <img src="../../../assets/images/CodeNoob.jpeg" alt="">
     </div>
     <div class="text-center mt-4 name">
-      {{cuestionarioModelPut.nombreCuestionario}}
+      <p> {{cuestionarioModelGet.nombreCuestionario}} </p>
     </div>
     <form class="p-3 mt-3">
       <div *ngFor="let preguntas  of cuestionarioModelPut.items">
@@ -71,7 +73,7 @@
 </div>
 
 <section class="container mt-4" *ngIf="validation == false">
-  <div class="alert alert-warning" role="alert">
+  <div class="alert alert-danger text-center" role="alert">
     <h4 class="alert-heading">¡Lo sentimos!</h4>
     <p>Al parecer no hay preguntas que visualizar en este momento, ¡Por favor revisa mas tarde!</p>
     <hr>
@@ -94,10 +96,10 @@
       <select class="form-select mt-3" aria-label="Default select example" name="pregunta" #pregunta="ngModel"
               [(ngModel)]="preguntasDelete.pregunta">
         <option selected>Seleccionar --</option>
-        <option *ngFor="let preguntas of cuestionarioModelPut.items" [value]="preguntas.pregunta">{{preguntas.pregunta}}</option>
+         <option *ngFor="let preguntas of cuestionarioModelPut.items" [value]="preguntas.pregunta">{{preguntas.pregunta}}</option>
       </select>
     </form>
-    <button class="btn btn-warning mt-3" data-bs-dismiss="offcanvas">Cerrar</button>
+    <button class="btn btn-info mt-3 mx-1" data-bs-dismiss="offcanvas">Cerrar</button>
     <button class="btn btn-danger mt-3" data-bs-dismiss="offcanvas" (click)="deletePregunta()">Eliminar</button>
   </div>
 </div>
@@ -126,7 +128,7 @@
         <input type="number" class="form-control" id="inputDesc" name="puntosPregunta" #puntosPregunta="ngModel"
           [(ngModel)]="preguntasGet.puntosPregunta">
       </div>
-      <button class="btn btn-danger" data-bs-dismiss="offcanvas">Cerrar</button>
+      <button class="btn btn-danger mx-1" data-bs-dismiss="offcanvas">Cerrar</button>
       <button class="btn btn-success" data-bs-dismiss="offcanvas" (click)="putPregunta()">Editar</button>
     </form>
   </div>

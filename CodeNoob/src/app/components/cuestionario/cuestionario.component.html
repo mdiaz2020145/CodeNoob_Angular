@@ -2,7 +2,7 @@
 
 <!-- Button trigger modal -->
 <div class="container mb-3">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
     (click)="listarCursos()">
     Agregar cuestionario
   </button>
@@ -28,7 +28,7 @@
           [(ngModel)]="cuestionarioModelPut.numeroLeccion">
       </div>
     </form>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas">Cerrar</button>
+    <button type="button" class="btn btn-danger mx-1" data-bs-dismiss="offcanvas">Cerrar</button>
     <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" (click)="putCuestionario()">Editar</button>
   </div>
 </div>
@@ -36,8 +36,8 @@
 <!-- nueva card -->
 <div class="container">
   <div class="row" *ngIf="validation == true">
-    <div class="col col-md-6" *ngFor="let cuestionario  of cuestionarioModelGetId ">
-      <div class="example-1 card" >
+    <div class="col col-md-4" *ngFor="let cuestionario  of cuestionarioModelGetId ">
+      <div class="card example-1 mb-5" >
         <div class="wrapper" >
           <div class="date">
             <span class="day">No.</span>
@@ -70,7 +70,7 @@
 </div>
 
 <section class="container mt-4" *ngIf="validation == false">
-  <div class="alert alert-warning" role="alert">
+  <div class="alert alert-danger text-center" role="alert">
     <h4 class="alert-heading">¡Lo sentimos!</h4>
     <p>Al parecer no hay cuestionarios que visualizar en este momento, ¡Por favor revisa mas tarde!</p>
     <hr>

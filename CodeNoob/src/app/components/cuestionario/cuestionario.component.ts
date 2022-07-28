@@ -35,6 +35,7 @@ export class CuestionarioComponent implements OnInit {
         console.log(res.cuestionario)
         if (res.cuestionario == 0) {
           this.validation = false;
+          this.cuestionarioModelGetId = JSON.parse(JSON.stringify(res.cuestionario))
           console.log("Datos vacios")
         } else {
           this.validation = true;

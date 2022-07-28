@@ -25,11 +25,8 @@
             <h4 class="card-title text-center" style="font-size: 30px;">{{curso.nombreCurso}}</h4>
             <p class="card-text text-justify">{{curso.descripcion}}</p>
 
-            <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_ALUMNO'"> <a 
-              class="btn btn-success" data-bs-toggle="offcanvas" data-bs-toggle="modal" data-bs-target="#AsignacionModal" 
-              (click)="asignacion(curso.nombreCurso)">Asignarse</a></div>
-
-
+            <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_ALUMNO'"> <a
+              class="btn btn-success" (click)="asignacion(curso._id)">Asignarse</a></div>
             <div class="text-center my-4" *ngIf="_cursosService.obtenerIdentidad().rol==='ROL_PROFESOR'">
               <a class="btn btn-warning m-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                 aria-controls="offcanvasExample" (click)="obtenerCursoId(curso._id)">Editar</a>

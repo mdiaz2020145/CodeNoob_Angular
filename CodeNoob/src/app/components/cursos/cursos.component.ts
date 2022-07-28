@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Cursos } from 'src/app/models/cursos.model';
 import { Asignacion } from 'src/app/models/asignacion.model';
 import { CursosService } from 'src/app/services/cursos.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-cursos',
@@ -17,6 +18,7 @@ export class CursosComponent implements OnInit {
   public cursoModelGetId: Cursos;
   public cursoModelPost: Cursos;
   public asignacionModelPost:Asignacion;
+  public asignacionExitosa:any;
   public token: any;
   public validation: Boolean = true;
 
@@ -75,6 +77,28 @@ export class CursosComponent implements OnInit {
     })
   }
 
+  asignacion(idCurso){
+    this._cursosService.asignarCurso(idCurso, this.token).subscribe({
+      next: (response)=>{
+        console.log(response.Asignacion)
+        if(response.Asignacion=="n"){
+          Swal.fire({
+            icon: 'error',
+            title: 'Lo sentimos',
+            text: 'No puedes asignarte al mismo curso dos veces',
+          })
+        }else{
+          Swal.fire(
+            '¡Muy bien!',
+            'Te has asignado correctamente',
+            'success'
+          )
+        }
+      },
+      error: (err: any)=>{ console.log(err) }
+    })
+  }
+
   obtenerCursoId(idCurso){
     this._cursosService.obtenerCursoId(idCurso, this.token).subscribe({
       next: (response)=>{
@@ -84,11 +108,4 @@ export class CursosComponent implements OnInit {
     })
   }
 
-  asignacion(nombreCurso){
-    this._cursosService.asignarCurso(nombreCurso,this.token).subscribe({
-      next:(response)=>{
-      },
-      error:(err:any)=>{console.log(err)}
-    })
-  }
 }

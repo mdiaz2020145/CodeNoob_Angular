@@ -25,7 +25,7 @@ export class PreguntasComponent implements OnInit {
 
   constructor(public _cuestionarioService: CuestionarioService, public _activatedRoute: ActivatedRoute) {
     this.cuestionarioModelPost = new CuestionarioModule("", "", "", [{ pregunta: "", respuesta: "", puntosPregunta: 0 }], 0, "", "")
-    this.cuestionarioModelGet = new CuestionarioModule("", "", "", [{ pregunta: "", respuesta: "", puntosPregunta: 0 }], 0, "", "")
+    this.cuestionarioModelGet= new CuestionarioModule("", "", "", [{ pregunta: "", respuesta: "", puntosPregunta: 0 }], 0, "", "")
     this.cuestionarioModelPut = new CuestionarioModule("", "", "", [{ pregunta: "", respuesta: "", puntosPregunta: 0 }], 0, "", "")
     this.preguntasPost = new PreguntasModel("", "", "", "", 0)
     this.preguntasGet = new PreguntasModel("", "", "", "", 0)
@@ -39,18 +39,21 @@ export class PreguntasComponent implements OnInit {
       console.log(dataRuta.get("idCuestionario"))
       this.getPreguntas(dataRuta.get("idCuestionario"))
       this.idCuestionario = dataRuta.get("idCuestionario")
+      this.buscarCuestionario()
     })
   }
 
   getPreguntas(idCuestionario: String) {
     this._cuestionarioService.buscarPreguntas(idCuestionario).subscribe({
       next: (res) => {
-        if (res.pregunta == 0) {
-          console.log('Datos vacios')
+        this.cuestionarioModelPut = res.pregunta
+        console.log("items"+this.cuestionarioModelPut)
+        if (this.cuestionarioModelPut==null) {
           this.validation = false
+          console.log("Sin preguntas en el cuestionario "+this.validation)
         } else {
           this.validation = true
-          this.cuestionarioModelPut = res.pregunta
+          console.log("Con preguntas en el cuestionario "+this.validation)
         }
       }, error: (err) => { console.log(err) }
     })
@@ -92,5 +95,13 @@ export class PreguntasComponent implements OnInit {
         console.log(res.pregunta.pregunta)
       }, error: (err) => { console.log(err) }
     })
+  }
+
+  buscarCuestionario(){
+    this._cuestionarioService.buscarSoloPorId(this.idCuestionario).subscribe({
+      next: (res) => {
+      this.cuestionarioModelGet = res.cuestionario;
+      return this.cuestionarioModelGet
+    }, error: (err) => { console.log(err) }})
   }
 }

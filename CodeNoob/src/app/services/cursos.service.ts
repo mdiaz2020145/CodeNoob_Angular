@@ -66,9 +66,9 @@ export class CursosService {
     return this._http.delete(this.url + "/eliminarCurso/" + idCurso, { headers: headersToken })
   }
 
-  asignarCurso(nombreCurso:String,token:any):Observable<any>{
+  asignarCurso(idCurso: String, token: any): Observable<any> {
     let headersToken = this.headersVariable.set('Authorization', token)
-    return this._http.post(this.url + '/asignacionCurso/'+nombreCurso,{headers:headersToken})
+    return this._http.get(this.url + "/asignacionCurso/" + idCurso, { headers: headersToken })
   }
 
 
