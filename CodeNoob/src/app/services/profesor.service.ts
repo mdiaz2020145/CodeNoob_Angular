@@ -53,4 +53,24 @@ registrarProfe(modeloProfe: Profesores): Observable<any> {
   let parametros = JSON.stringify(modeloProfe);
   return this._http.post(this.url + '/registrarProfesor', parametros, { headers: this.headersVariable })
 }
+
+obtenerProfe(): Observable<any>{
+  return this._http.get(this.url + '/buscarProfesor', { headers: this.headersVariable })
+}
+
+obtenerProfeId(id: any, token: any): Observable<any> {
+  let headersToken = this.headersVariable.set('Authorization', token)
+  return this._http.get(this.url + '/buscarProfesorID/' + id, { headers: headersToken })
+}
+
+editarPerfilProfe(modeloProfe:Profesores,  token: any): Observable<any>{
+  let headersToken = this.headersVariable.set('Authorization', token)
+  let parametros = JSON.stringify(modeloProfe)
+  return this._http.put(this.url + "/editarProfesor/" + modeloProfe._id, parametros, { headers: headersToken })
+}
+
+eliminarPerfilProfe(id: String, token: any): Observable<any> {
+  let headersToken = this.headersVariable.set('Authorization', token)
+  return this._http.delete(this.url + '/eliminarProfesor/' + id, { headers: headersToken })
+}
 }

@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.0.45/css/materialdesignicons.min.css" integrity="sha256-nRyVCcVDSlWN9d68r9M+rKBLE4k9Cp1j3XSY/umjvvU=" crossorigin="anonymous" />
+<br><br><br><br>
+<div class="container" style="margin-top: 25px; width: 100%;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card m-b-30">
+                <div class="card-header bg-white">
+                    <h5 class="card-title text-black mb-0">Perfil de {{profesorModelGetId.nombreProfe}} (Profesor)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="xp-social-profile">
+                        <div class="xp-social-profile-img">
+                            <div class="row">
+                                <div class="col-4 px-1">
+                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
+                                </div>
+                                <div class="col-4 px-1">
+                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
+                                </div>
+                                <div class="col-4 px-1">
+                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="xp-social-profile-top">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="xp-social-profile-star py-3">
+                                        <i class="mdi mdi-star font-24"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="xp-social-profile-avatar text-center">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user-profile" class="rounded-circle img-fluid">
+                                        <span class="xp-social-profile-live"></span>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="xp-social-profile-menu text-right py-3">
+                                        <i class="mdi mdi-dots-horizontal font-24"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="xp-social-profile-middle text-center">
+                          <div class="row">
+                              <div class="col-12">
+                                  <label for="inputEmail" class="form-label">Editar email</label>
+                                  <div class="col-6 mb-3">
+                                  <input type="email" class="form-control" id="inputEmail" name="email" #email="ngModel"
+                                  [(ngModel)]="profesorModelGetId.email" required
+                                  >
+                              </div>
+                                  <label for="inputNombreUsuario" class="form-label">Editar nombre</label>
+                                  <div class="col-6 mb-3">
+                                  <input type="nombreProfe" class="form-control" id="nombreProfe" name="nombreProfe" #nombreProfe="ngModel"
+                                  [(ngModel)]="profesorModelGetId.nombreProfe" required
+                                  >
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="xp-social-profile-bottom text-center" style="align-items: center; margin: 0px;">
+                          <div class="row">
+                              <div class="col-4" style="align-self: center;">
+                                <button class="btn btn-guardar btn-lg btn-block" name="button" type="button"
+                                style="color:black; display:block; width: 160px; margin: 0 auto ; " data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
+                                (click)="putCuentaProfe()">Actualizar
+                              </button>
+                              </div>
+                              <div class="col-4">
+                                <button class="btn btn-eliminarC btn-lg btn-block" name="button" type="button"
+                                style="color:black; display:block; width: 160px; margin: 0 auto ; " data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" routerLink="/eleccionRegistro"
+                                (click)="deleteProfe()">Eliminar
+                                </button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

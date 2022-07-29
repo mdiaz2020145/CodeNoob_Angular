@@ -13,21 +13,11 @@
           <li><a class="nav-link scrollto" routerLink="/cursos" routerLinkActive="active">Cursos</a></li>
           <li><a class="nav-link scrollto " routerLink="/cuestionario" routerLinkActive="active">Cuestionario</a></li>
           <li><a class="nav-link scrollto" href="">C</a></li>
-          <li class="dropdown"><a href="#"><span>D</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO' || _profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/editarPerfil">Editar perfil</a></li>
+              <li><a *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/editarPerfilProfe">Editar perfil</a></li>
+              <li><a href="/eleccionLogin" (click)="cerrarSesion()">Cerrar sesion</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">E</a></li>

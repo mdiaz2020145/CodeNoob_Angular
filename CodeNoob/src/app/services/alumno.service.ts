@@ -50,8 +50,28 @@ export class AlumnoService {
     return this.identidad;
   }
 
+  obtenerAlumno(): Observable<any>{
+    return this._http.get(this.url + '/buscarAlumno', { headers: this.headersVariable })
+  }
+
+  obtenerAlumnoId(id: any, token: any): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token)
+    return this._http.get(this.url + '/buscarAlumnoID/' + id, { headers: headersToken })
+  }
+
   registrarAlumno(modeloAlumno: Alumnos): Observable<any> {
     let parametros = JSON.stringify(modeloAlumno);
     return this._http.post(this.url + '/registrarAlumno', parametros, { headers: this.headersVariable })
+  }
+
+  editarPerfilAlumno(modeloAlumno:Alumnos,  token: any): Observable<any>{
+    let headersToken = this.headersVariable.set('Authorization', token)
+    let parametros = JSON.stringify(modeloAlumno)
+    return this._http.put(this.url + "/editarAlumno/" + modeloAlumno._id, parametros, { headers: headersToken })
+  }
+
+  eliminarPerfilAlumno(id: String, token: any): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token)
+    return this._http.delete(this.url + '/eliminarAlumno/' + id, { headers: headersToken })
   }
 }

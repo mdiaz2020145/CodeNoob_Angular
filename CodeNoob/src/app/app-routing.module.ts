@@ -10,6 +10,8 @@ import { LoginAlumnoComponent } from './components/login-alumno/login-alumno.com
 import { CursosComponent } from './components/cursos/cursos.component';
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
+import { EditarPefilProfeComponent } from './components/editar-pefil-profe/editar-pefil-profe.component';
 
 const routes: Routes = [
   { path: "bienvenida", component: BienvenidaComponent },
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: "loginAlumno", component: LoginAlumnoComponent },
   { path: "cursos", component: CursosComponent },
   { path: "cuestionario", component: CuestionarioComponent },
-  { path: "preguntas/:idCuestionario", component: PreguntasComponent }
+  { path: "preguntas/:idCuestionario", component: PreguntasComponent },
+  { path: "editarPerfil", component: EditarPerfilComponent},
+  {path: "editarPerfilProfe", component: EditarPefilProfeComponent}
 ];
 
 @NgModule({

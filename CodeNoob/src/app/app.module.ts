@@ -18,6 +18,8 @@ import { CursosComponent } from './components/cursos/cursos.component';
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 import { ValueArrayPipe } from './pipes/value-array.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
+import { EditarPefilProfeComponent } from './components/editar-pefil-profe/editar-pefil-profe.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { PreguntasComponent } from './components/preguntas/preguntas.component';
     CuestionarioComponent,
     ValueArrayPipe,
     PreguntasComponent,
+    EditarPerfilComponent,
+    EditarPefilProfeComponent,
   ],
   imports: [
     BrowserModule,
