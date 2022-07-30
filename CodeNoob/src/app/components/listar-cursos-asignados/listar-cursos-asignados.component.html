@@ -1,0 +1,13 @@
+<br><br><br><br><br>
+<section class="cards" *ngFor="let datos of cursos">
+  <article class="card card--1" class="card card--1" *ngIf="datos.nombreCurso != 'function String() { [native code] }' && datos._id != 'function String() { [native code] }' ">
+    <div class="card__img"></div>
+    <a href="#" class="card_link">
+      <div class="card__img--hover"></div>
+    </a>
+    <div class="card__info">
+      <h3 class="card__title">{{datos.nombreCurso}}</h3>
+      <button class="btn-info" [routerLink]="['/alumno/listarLeccion',datos._id]">Realizar Cuestionario</button>
+    </div>
+  </article>
+</section>

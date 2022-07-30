@@ -17,8 +17,8 @@ export class CursosComponent implements OnInit {
   public cursoModelGet: Cursos;
   public cursoModelGetId: Cursos;
   public cursoModelPost: Cursos;
-  public asignacionModelPost:Asignacion;
-  public asignacionExitosa:any;
+  public asignacionModelPost: Asignacion;
+  public asignacionExitosa: any;
   public token: any;
   public validation: Boolean = true;
 
@@ -26,7 +26,7 @@ export class CursosComponent implements OnInit {
   constructor(public _cursosService: CursosService) {
     this.cursoModelGetId = new Cursos('', '', '', '')
     this.cursoModelPost = new Cursos('', '', '', '')
-    this.asignacionModelPost = new Asignacion('','','')
+    this.asignacionModelPost = new Asignacion('', '', '')
     this.token = _cursosService.obtenerToken();
   }
 
@@ -37,11 +37,11 @@ export class CursosComponent implements OnInit {
   obtenerCursos() {
     this._cursosService.obtenerCursos().subscribe({
       next: (response) => {
-        if(response==0){
+        if (response == 0) {
           console.log("Sin cursos que mostrar")
-          this.validation=false;
-        }else{
-          this.validation=true;
+          this.validation = false;
+        } else {
+          this.validation = true;
           this.cursoModelGet = response.Cursos;
           console.log("Cursos " + this.cursoModelGet)
         }
@@ -50,44 +50,44 @@ export class CursosComponent implements OnInit {
     })
   }
 
-  agregarCurso(){
+  agregarCurso() {
     this._cursosService.agregarCurso(this.cursoModelPost, this.token).subscribe({
-      next:(response)=>{
+      next: (response) => {
         this.obtenerCursos();
       },
-      error: (err: any)=>{ console.log(err) }
+      error: (err: any) => { console.log(err) }
     })
   }
 
-  editarCurso(){
+  editarCurso() {
     this._cursosService.editarCurso(this.cursoModelGetId, this.token).subscribe({
-      next:(response)=>{
+      next: (response) => {
         this.obtenerCursos();
       },
-      error: (err: any)=>{ console.log(err) }
+      error: (err: any) => { console.log(err) }
     })
   }
 
-  eliminarCurso(idCurso){
+  eliminarCurso(idCurso) {
     this._cursosService.eliminarCurso(idCurso, this.token).subscribe({
-      next:(response)=>{
+      next: (response) => {
         this.obtenerCursos();
       },
-      error: (err: any)=>{ console.log(err) }
+      error: (err: any) => { console.log(err) }
     })
   }
 
-  asignacion(idCurso){
+  asignacion(idCurso) {
     this._cursosService.asignarCurso(idCurso, this.token).subscribe({
-      next: (response)=>{
+      next: (response) => {
         console.log(response.Asignacion)
-        if(response.Asignacion=="n"){
+        if (response.Asignacion == "n") {
           Swal.fire({
             icon: 'error',
             title: 'Lo sentimos',
             text: 'No puedes asignarte al mismo curso dos veces',
           })
-        }else{
+        } else {
           Swal.fire(
             '¡Muy bien!',
             'Te has asignado correctamente',
@@ -95,16 +95,16 @@ export class CursosComponent implements OnInit {
           )
         }
       },
-      error: (err: any)=>{ console.log(err) }
+      error: (err: any) => { console.log(err) }
     })
   }
 
-  obtenerCursoId(idCurso){
+  obtenerCursoId(idCurso) {
     this._cursosService.obtenerCursoId(idCurso, this.token).subscribe({
-      next: (response)=>{
+      next: (response) => {
         this.cursoModelGetId = response.Curso
       },
-      error: (err: any)=>{ console.log(err) }
+      error: (err: any) => { console.log(err) }
     })
   }
 

@@ -16,6 +16,8 @@ import { InicioAlumnoComponent } from './components/inicio-alumno/inicio-alumno.
 import { InicioProfesorComponent } from './components/inicio-profesor/inicio-profesor.component';
 import { AlumnoGuard } from './services/alumno.guard';
 import { ProfesorGuard } from './services/profesor.guard';
+import { ListarCursosAsignadosComponent } from './components/listar-cursos-asignados/listar-cursos-asignados.component';
+import { ListaLeccionesComponent } from './components/lista-lecciones/lista-lecciones.component';
 
 const routes: Routes = [
   { path: "bienvenida", component: BienvenidaComponent },
@@ -30,6 +32,8 @@ const routes: Routes = [
       { path: "editarPerfil", component: EditarPerfilComponent },
       { path: "cursos", component: CursosComponent },
       { path: "preguntas/:idCuestionario", component: PreguntasComponent },
+      { path: "cursosAsignados", component: ListarCursosAsignadosComponent },
+      { path: "listarLeccion/:idCurso", component: ListaLeccionesComponent }
     ]
   },
   {

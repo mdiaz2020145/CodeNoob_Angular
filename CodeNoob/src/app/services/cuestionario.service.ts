@@ -68,6 +68,10 @@ export class CuestionarioService {
     return this._http.post(this.url + '/buscarPreguntaId/' + idCuestionario, parametros, { headers: this.headersVariable })
   }
 
+  buscarPorCurso(idCurso: String): Observable<any> {
+    return this._http.get(this.url + '/burcarPorCurso/' + idCurso, { headers: this.headersVariable })
+  }
+
   obtenerToken() {
     var token2 = localStorage.getItem('token');
     if (token2 != undefined) {

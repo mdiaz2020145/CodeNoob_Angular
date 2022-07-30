@@ -11,6 +11,7 @@
           <li><a class="nav-link scrollto active" href="/bienvenida">Home</a></li>
           <li><a class="nav-link scrollto" *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/alumno/cursos" routerLinkActive="active">Cursos</a></li>
           <li><a class="nav-link scrollto" *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/profesor/cursos" routerLinkActive="active">Cursos</a></li>
+          <li><a class="nav-link scrollto" *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/alumno/cursosAsignados" routerLinkActive="active">Cursos Asginados</a></li>
           <li><a class="nav-link scrollto " *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/profesor/cuestionario" routerLinkActive="active">Cuestionario</a></li>
           <li class="dropdown"><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO' || _profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
