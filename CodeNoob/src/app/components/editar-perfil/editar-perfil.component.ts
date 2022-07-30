@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumnos } from 'src/app/models/alumnos.model';
 import { AlumnoService } from 'src/app/services/alumno.service';
-
+import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-editar-perfil',
   templateUrl: './editar-perfil.component.html',
@@ -16,7 +17,7 @@ export class EditarPerfilComponent implements OnInit {
   public buscar;
   public validation:Boolean = true;
 
-  constructor(public _serviceAlumno:AlumnoService) {
+  constructor(public _serviceAlumno:AlumnoService, public _router:Router) {
     this.alumnoModelGetId = new Alumnos('','','','','',0);
     this.token = _serviceAlumno.obtenerToken();
     this.id = _serviceAlumno.obtenerIdentidad()._id;
@@ -58,6 +59,11 @@ export class EditarPerfilComponent implements OnInit {
   putCuentaAlumno(){
     this._serviceAlumno.editarPerfilAlumno(this.alumnoModelGetId, this.token).subscribe(
       response => {
+        Swal.fire(
+          '¡Muy bien!',
+          'Tu cuenta se ha actualizado correctamente',
+          'success'
+        )
         this.getAlumnos()
       },
       error=> {
@@ -67,19 +73,48 @@ export class EditarPerfilComponent implements OnInit {
   }
 
   deleteUsuario() {
-    this._serviceAlumno.eliminarPerfilAlumno(this.id, this.token).subscribe(
-      (response)=>{
-        console.log(response);
-        if(response.AlumnoEliminado==0){
-          this.validation=false;
-        }else{
-          this.validation=true;
-          this.getAlumnos();
-        }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-      (error)=>{
-        console.log(error);
+      buttonsStyling: true
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Esta seguro de eliminar su cuenta?',
+      text: "Este proceso sera irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, lo hare',
+      cancelButtonText: '¡Cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._serviceAlumno.eliminarPerfilAlumno(this.id, this.token).subscribe(
+          (response)=>{
+            console.log(response);
+            this._router.navigate(['/eleccionRegistro']);
+              swalWithBootstrapButtons.fire(
+                '¡Eliminado!',
+                'Tu cuenta ha sido eliminada',
+                'success'
+              )
+              this.getAlumnos();
+          },
+          (error)=>{
+            console.log(error);
+          }
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          '',
+          'error'
+        )
       }
-    )
+    })
   }
 }

@@ -1,43 +1,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.0.45/css/materialdesignicons.min.css" integrity="sha256-nRyVCcVDSlWN9d68r9M+rKBLE4k9Cp1j3XSY/umjvvU=" crossorigin="anonymous" />
 <br><br><br><br>
 <div class="container" style="margin-top: 25px;">
-    <div class="row">
+    <div class="row justify-content-center align-items-center" style="height: 80vh">
         <div class="col-md-6">
             <div class="card m-b-30">
                 <div class="card-header bg-white">
-                    <h5 class="card-title text-black mb-0">Perfil de {{alumnoModelGetId.nombreUsuario}} (Alumno)</h5>
+                    <h5 class="card-title text-black text-center mb-0">Perfil de {{alumnoModelGetId.nombreUsuario}} (Alumno)</h5>
                 </div>
                 <div class="card-body">
                     <div class="xp-social-profile">
-                        <div class="xp-social-profile-img">
-                            <div class="row">
-                                <div class="col-4 px-1">
-                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
-                                </div>
-                                <div class="col-4 px-1">
-                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
-                                </div>
-                                <div class="col-4 px-1">
-                                    <img src="../../../assets/images/codificacion.png" class="rounded img-fluid" alt="img">
-                                </div>
-                            </div>
-                        </div>
                         <div class="xp-social-profile-top">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="xp-social-profile-star py-3">
-                                        <i class="mdi mdi-star font-24"></i>
+
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="xp-social-profile-avatar text-center">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user-profile" class="rounded-circle img-fluid">
-                                        <span class="xp-social-profile-live"></span>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="xp-social-profile-menu text-right py-3">
-                                        <i class="mdi mdi-dots-horizontal font-24"></i>
+
                                     </div>
                                 </div>
                             </div>
@@ -46,12 +32,12 @@
                             <div class="row">
                                 <div class="col-12">
                                     <label for="inputEmail" class="form-label">Editar email</label>
-                                    <div class="col-6 mb-3">
+                                    <div class="col-9 mb-3" style="width: 75%;margin: 0 auto;">
                                     <input type="email" class="form-control" id="inputEmail" name="email" #email="ngModel"
                                     [(ngModel)]="alumnoModelGetId.email" required>
                                 </div>
                                     <label for="inputNombreUsuario" class="form-label">Editar nombre</label>
-                                    <div class="col-6 mb-3">
+                                    <div class="col-9 mb-3" style="width: 75%;margin: 0 auto;">
                                     <input type="nombreUsuario" class="form-control" id="nombreUsuario" name="nombreUsuario" #nombreUsuario="ngModel"
                                     [(ngModel)]="alumnoModelGetId.nombreUsuario" required>
                                   </div>
@@ -60,17 +46,15 @@
                         </div>
                         <div class="xp-social-profile-bottom text-center">
                             <div class="row">
-                                <div class="col-4">
-                                  <button class="btn btn-guardar btn-lg btn-block" name="button" type="button"
-                                  style="color:black; display:block; width: 160px; margin: 0 auto ; " data-bs-toggle="offcanvas"
+                                <div class="col-4" style="width: 85%;margin: 0 auto;">
+                                  <button class="btn btn-guardar btn-lg btn-block mx-2" name="button" type="button"
+                                  style="color:black; width: 160px;" data-bs-toggle="offcanvas"
                                   data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
                                   (click)="putCuentaAlumno()">Actualizar
                                 </button>
-                                </div>
-                                <div class="col-4">
-                                  <button class="btn btn-eliminarC btn-lg btn-block" name="button" type="button"
-                                  style="color:black; display:block; width: 160px; margin: 0 auto ; " data-bs-toggle="offcanvas"
-                                  data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" routerLink="/eleccionRegistro"
+                                <button class="btn btn-eliminarC btn-lg btn-block mx-2" name="button" type="button"
+                                  style="color:black; width: 160px;" data-bs-toggle="offcanvas"
+                                  data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
                                   (click)="deleteUsuario()">Eliminar
                                   </button>
                                 </div>

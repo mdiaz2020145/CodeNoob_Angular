@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfesorService } from 'src/app/services/profesor.service';
 import { Profesores } from 'src/app/models/profesores.model';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-pefil-profe',
@@ -17,7 +18,7 @@ export class EditarPefilProfeComponent implements OnInit {
   public buscar;
   public validation:Boolean = true;
 
-  constructor(public _serviceProfesor: ProfesorService) {
+  constructor(public _serviceProfesor: ProfesorService, public _router: Router) {
     this.profesorModelGetId = new Profesores('','','','','');
     this.token = _serviceProfesor.obtenerToken();
     this.id = _serviceProfesor.obtenerIdentidad()._id;
@@ -59,6 +60,11 @@ export class EditarPefilProfeComponent implements OnInit {
   putCuentaProfe(){
     this._serviceProfesor.editarPerfilProfe(this.profesorModelGetId, this.token).subscribe(
       response => {
+        Swal.fire(
+          '¡Muy bien!',
+          'Tu cuenta se ha actualizado correctamente',
+          'success'
+        )
         this.getProfes()
       },
       error=> {
@@ -68,19 +74,48 @@ export class EditarPefilProfeComponent implements OnInit {
   }
 
   deleteProfe() {
-    this._serviceProfesor.eliminarPerfilProfe(this.id, this.token).subscribe(
-      (response)=>{
-        console.log(response);
-        if(response.ProfesorEliminado==0){
-          this.validation=false;
-        }else{
-          this.validation=true;
-          this.getProfes();
-        }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-      (error)=>{
-        console.log(error);
+      buttonsStyling: true
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Esta seguro de eliminar su cuenta?',
+      text: "Este proceso sera irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, lo hare',
+      cancelButtonText: '¡Cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._serviceProfesor.eliminarPerfilProfe(this.id, this.token).subscribe(
+          (response)=>{
+            console.log(response);
+            this._router.navigate(['/eleccionRegistro']);
+              swalWithBootstrapButtons.fire(
+                '¡Eliminado!',
+                'Tu cuenta ha sido eliminada',
+                'success'
+              )
+              this.getProfes();
+          },
+          (error)=>{
+            console.log(error);
+          }
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          '',
+          'error'
+        )
       }
-    )
+    })
   }
 }
