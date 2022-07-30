@@ -10,11 +10,11 @@ import { AlumnoService } from 'src/app/services/alumno.service';
   providers: [AlumnoService]
 })
 export class LoginAlumnoComponent implements OnInit {
-  public alumnoModelo : Alumnos;
+  public alumnoModelo: Alumnos;
 
   constructor(private _alumnoService: AlumnoService, private _router: Router) {
-    this.alumnoModelo = new Alumnos('','','','','',0);
-   }
+    this.alumnoModelo = new Alumnos('', '', '', '', '', 0);
+  }
 
   ngOnInit(): void {
   }
@@ -32,17 +32,17 @@ export class LoginAlumnoComponent implements OnInit {
     )
   }
 
-  loginAlumno(){
-   this._alumnoService.loginAlumno(this.alumnoModelo).subscribe(
-    (response)=>{
-      this.getTokenAlumno();
-      localStorage.setItem("identidad", JSON.stringify(response.Alumno))
-      console.log(response);
-      this._router.navigate(['/bienvenida']);
-    },
-    (error) => {
-      console.log(<any>error);
-    }
-   )
+  loginAlumno() {
+    this._alumnoService.loginAlumno(this.alumnoModelo).subscribe(
+      (response) => {
+        this.getTokenAlumno();
+        localStorage.setItem("identidad", JSON.stringify(response.Alumno))
+        console.log(response);
+        this._router.navigate(['/alumno/cursos']);
+      },
+      (error) => {
+        console.log(<any>error);
+      }
+    )
   }
 }

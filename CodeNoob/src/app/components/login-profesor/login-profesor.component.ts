@@ -10,17 +10,17 @@ import { Profesores } from 'src/app/models/profesores.model';
   providers: [ProfesorService]
 })
 export class LoginProfesorComponent implements OnInit {
-  public profesorModel : Profesores;
+  public profesorModel: Profesores;
 
   constructor(private _profesorServices: ProfesorService, private _router: Router) {
-    this.profesorModel = new Profesores('','','','','');
+    this.profesorModel = new Profesores('', '', '', '', '');
   }
 
 
   ngOnInit(): void {
   }
 
- getTokenProfe() {
+  getTokenProfe() {
     this._profesorServices.loginProfesor(this.profesorModel, "true").subscribe(
       (response) => {
         console.log(response);
@@ -33,18 +33,18 @@ export class LoginProfesorComponent implements OnInit {
     )
   }
 
-  loginProfe(){
-   this._profesorServices.loginProfesor(this.profesorModel).subscribe(
-    (response)=>{
-      this.getTokenProfe();
-      localStorage.setItem("identidad", JSON.stringify(response.Profesor))
-      console.log(response);
-      this._router.navigate(['/bienvenida']);
-    },
-    (error) => {
-      console.log(<any>error);
-    }
-   )
+  loginProfe() {
+    this._profesorServices.loginProfesor(this.profesorModel).subscribe(
+      (response) => {
+        this.getTokenProfe();
+        localStorage.setItem("identidad", JSON.stringify(response.Profesor))
+        console.log(response);
+        this._router.navigate(['/profesor/cursos']);
+      },
+      (error) => {
+        console.log(<any>error);
+      }
+    )
   }
 
 }

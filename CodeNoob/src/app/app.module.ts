@@ -20,6 +20,8 @@ import { ValueArrayPipe } from './pipes/value-array.pipe';
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { EditarPefilProfeComponent } from './components/editar-pefil-profe/editar-pefil-profe.component';
+import { InicioProfesorComponent } from './components/inicio-profesor/inicio-profesor.component';
+import { InicioAlumnoComponent } from './components/inicio-alumno/inicio-alumno.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { EditarPefilProfeComponent } from './components/editar-pefil-profe/edita
     PreguntasComponent,
     EditarPerfilComponent,
     EditarPefilProfeComponent,
+    InicioProfesorComponent,
+    InicioAlumnoComponent,
   ],
   imports: [
     BrowserModule,

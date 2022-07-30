@@ -12,6 +12,10 @@ import { CuestionarioComponent } from './components/cuestionario/cuestionario.co
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { EditarPefilProfeComponent } from './components/editar-pefil-profe/editar-pefil-profe.component';
+import { InicioAlumnoComponent } from './components/inicio-alumno/inicio-alumno.component';
+import { InicioProfesorComponent } from './components/inicio-profesor/inicio-profesor.component';
+import { AlumnoGuard } from './services/alumno.guard';
+import { ProfesorGuard } from './services/profesor.guard';
 
 const routes: Routes = [
   { path: "bienvenida", component: BienvenidaComponent },
@@ -19,13 +23,23 @@ const routes: Routes = [
   { path: "eleccionRegistro", component: EleccionRegistroComponent },
   { path: "registraAlumno", component: RegistroAlumnoComponent },
   { path: "registrarProfe", component: RegistroProfesorComponent },
-  { path: "loginProfesor", component: LoginProfesorComponent },
   { path: "loginAlumno", component: LoginAlumnoComponent },
-  { path: "cursos", component: CursosComponent },
-  { path: "cuestionario", component: CuestionarioComponent },
-  { path: "preguntas/:idCuestionario", component: PreguntasComponent },
-  { path: "editarPerfil", component: EditarPerfilComponent},
-  {path: "editarPerfilProfe", component: EditarPefilProfeComponent}
+  { path: "loginProfesor", component: LoginProfesorComponent },
+  {
+    path: "alumno", component: InicioAlumnoComponent, canActivate: [AlumnoGuard], children: [
+      { path: "editarPerfil", component: EditarPerfilComponent },
+      { path: "cursos", component: CursosComponent },
+      { path: "preguntas/:idCuestionario", component: PreguntasComponent },
+    ]
+  },
+  {
+    path: "profesor", component: InicioProfesorComponent, canActivate: [ProfesorGuard], children: [
+      { path: "editarPerfilProfe", component: EditarPefilProfeComponent },
+      { path: "cursos", component: CursosComponent },
+      { path: "cuestionario", component: CuestionarioComponent },
+    ]
+  },
+  { path: "**", component: BienvenidaComponent }
 ];
 
 @NgModule({

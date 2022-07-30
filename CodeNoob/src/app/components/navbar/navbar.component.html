@@ -9,19 +9,16 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="/bienvenida">Home</a></li>
-          <li><a class="nav-link scrollto" href="/eleccionRegistro" routerLinkActive="active" routerLink="/eleccionRegistro">Registrarse</a></li>
-          <li><a class="nav-link scrollto" routerLink="/cursos" routerLinkActive="active">Cursos</a></li>
-          <li><a class="nav-link scrollto " routerLink="/cuestionario" routerLinkActive="active">Cuestionario</a></li>
-          <li><a class="nav-link scrollto" href="">C</a></li>
+          <li><a class="nav-link scrollto" *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/alumno/cursos" routerLinkActive="active">Cursos</a></li>
+          <li><a class="nav-link scrollto" *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/profesor/cursos" routerLinkActive="active">Cursos</a></li>
+          <li><a class="nav-link scrollto " *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/profesor/cuestionario" routerLinkActive="active">Cuestionario</a></li>
           <li class="dropdown"><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO' || _profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/editarPerfil">Editar perfil</a></li>
-              <li><a *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/editarPerfilProfe">Editar perfil</a></li>
+              <li><a *ngIf="_alumnoService.obtenerIdentidad().rol === 'ROL_ALUMNO'" routerLink="/alumno/editarPerfil">Editar perfil</a></li>
+              <li><a *ngIf="_profesorService.obtenerIdentidad().rol === 'ROL_PROFESOR'" routerLink="/profesor/editarPerfilProfe">Editar perfil</a></li>
               <li><a href="/eleccionLogin" (click)="cerrarSesion()">Cerrar sesion</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">E</a></li>
-          <li><a class="getstarted scrollto" routerLinkActive="active" href="/eleccionLogin" routerLink="/eleccionLogin">Inicia sesion</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
