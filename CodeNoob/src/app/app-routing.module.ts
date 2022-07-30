@@ -41,6 +41,7 @@ const routes: Routes = [
       { path: "editarPerfilProfe", component: EditarPefilProfeComponent },
       { path: "cursos", component: CursosComponent },
       { path: "cuestionario", component: CuestionarioComponent },
+      { path: "preguntas/:idCuestionario", component: PreguntasComponent }
     ]
   },
   { path: "**", component: BienvenidaComponent }
