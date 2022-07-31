@@ -25,17 +25,19 @@ export class ListaLeccionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getLecciones()
   }
 
   getLecciones() {
     this._cuestionarioServices.buscarPorCurso(this.idCurso).subscribe({
       next: (res) => {
-        if (res.pregunta === 0) {
+        if (res.pregunta == 0) {
+          this.validation=false;
           console.log('datos vacios')
         } else {
           this.cuestionarioModelGet = res.pregunta
+          this.validation=true;
         }
-
       }, error: (err: any) => { console.log(err) }
     })
   }

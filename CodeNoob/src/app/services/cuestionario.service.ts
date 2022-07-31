@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CuestionarioModule } from '../models/cuestionario.models';
 import { PreguntasModel } from '../models/preguntas.model';
+import { RespuestasModel } from '../models/respuestas.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,13 @@ export class CuestionarioService {
 
   buscarPorCurso(idCurso: String): Observable<any> {
     return this._http.get(this.url + '/burcarPorCurso/' + idCurso, { headers: this.headersVariable })
+  }
+
+  responderCuestionario(respuestas: RespuestasModel,idCuestionario: String, token: any): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token)
+    let parametros = JSON.stringify(respuestas)
+    console.log(parametros)
+    return this._http.post(this.url + '/respuestasAlumno/'+idCuestionario, parametros, { headers: headersToken})
   }
 
   obtenerToken() {

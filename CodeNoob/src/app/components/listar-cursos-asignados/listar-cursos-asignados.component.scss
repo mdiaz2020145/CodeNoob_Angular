@@ -35,13 +35,9 @@ body {
 
 .card--1 .card__img,
 .card--1 .card__img--hover {
-  background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+  background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
 }
 
-.card--2 .card__img,
-.card--2 .card__img--hover {
-  background-image: url('https://images.pexels.com/photos/307008/pexels-photo-307008.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
-}
 
 .card__like {
   width: 18px;
@@ -161,6 +157,13 @@ body {
 
 .card:hover .card__info-hover {
   opacity: 1;
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 5px 50px 5px 50px
 }
 
 .btn-warning {

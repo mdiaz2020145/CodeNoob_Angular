@@ -24,6 +24,7 @@ import { InicioProfesorComponent } from './components/inicio-profesor/inicio-pro
 import { InicioAlumnoComponent } from './components/inicio-alumno/inicio-alumno.component';
 import { ListarCursosAsignadosComponent } from './components/listar-cursos-asignados/listar-cursos-asignados.component';
 import { ListaLeccionesComponent } from './components/lista-lecciones/lista-lecciones.component';
+import { CuestionarioAlumnoComponent } from './components/cuestionario-alumno/cuestionario-alumno.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ListaLeccionesComponent } from './components/lista-lecciones/lista-lecc
     InicioAlumnoComponent,
     ListarCursosAsignadosComponent,
     ListaLeccionesComponent,
+    CuestionarioAlumnoComponent,
   ],
   imports: [
     BrowserModule,

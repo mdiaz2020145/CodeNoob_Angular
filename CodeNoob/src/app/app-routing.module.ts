@@ -18,6 +18,7 @@ import { AlumnoGuard } from './services/alumno.guard';
 import { ProfesorGuard } from './services/profesor.guard';
 import { ListarCursosAsignadosComponent } from './components/listar-cursos-asignados/listar-cursos-asignados.component';
 import { ListaLeccionesComponent } from './components/lista-lecciones/lista-lecciones.component';
+import { CuestionarioAlumnoComponent } from './components/cuestionario-alumno/cuestionario-alumno.component';
 
 const routes: Routes = [
   { path: "bienvenida", component: BienvenidaComponent },
@@ -31,9 +32,9 @@ const routes: Routes = [
     path: "alumno", component: InicioAlumnoComponent, canActivate: [AlumnoGuard], children: [
       { path: "editarPerfil", component: EditarPerfilComponent },
       { path: "cursos", component: CursosComponent },
-      { path: "preguntas/:idCuestionario", component: PreguntasComponent },
       { path: "cursosAsignados", component: ListarCursosAsignadosComponent },
-      { path: "listarLeccion/:idCurso", component: ListaLeccionesComponent }
+      { path: "listarLeccion/:idCurso", component: ListaLeccionesComponent },
+      { path: "resolverCuestionario/:idCuestionario", component: CuestionarioAlumnoComponent}
     ]
   },
   {

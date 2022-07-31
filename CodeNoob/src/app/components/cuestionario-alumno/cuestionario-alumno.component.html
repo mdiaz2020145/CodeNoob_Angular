@@ -1,0 +1,37 @@
+<br><br> <br> <br>
+<!-- card -->
+<div class="formulario" *ngIf="validation == true">
+  <div class="wrapper">
+    <div class="logo">
+      <img src="../../../assets/images/CodeNoob.jpeg" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+      <p> {{cuestionarioModelGet.nombreCuestionario}} </p>
+    </div>
+    <form class="p-3 mt-3" method="get">
+      <div *ngFor="let preguntas  of cuestionarioModelPut.items, let i=index">
+        <div class="mt-4 letra">
+          Pregunta:
+        </div>
+        <div class="formfield d-flex align-items-center">
+          <Label>{{preguntas.pregunta}}</Label>
+        </div>
+        <div class="mt-4 letra">
+          Respuesta:
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" name="respuesta">
+        </div>
+      </div>
+      <button class="btn btn-success" (click)="responderCuestionario()">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<section class="container mt-4" *ngIf="validation == false">
+  <div class="alert alert-danger text-center" role="alert">
+    <h4 class="alert-heading">¡Lo sentimos!</h4>
+    <p>Al parecer no hay preguntas que visualizar en este momento, ¡Por favor revisa mas tarde!</p>
+    <hr>
+  </div>
+</section>
