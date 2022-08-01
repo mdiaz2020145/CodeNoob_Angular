@@ -10,7 +10,7 @@ import { RespuestasModel } from '../models/respuestas.model';
 })
 export class CuestionarioService {
 
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://app-codenoob.herokuapp.com/api';
   public headersVariable = new HttpHeaders().set('Content-Type', 'application/json');
   public token: any;
   public identidad: any;

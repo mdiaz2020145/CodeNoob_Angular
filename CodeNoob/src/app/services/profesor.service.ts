@@ -7,7 +7,7 @@ import { Profesores } from '../models/profesores.model';
   providedIn: 'root'
 })
 export class ProfesorService {
- public url: String = 'http://localhost:3000/api';
+ public url: String = 'https://app-codenoob.herokuapp.com/api';
  public headersVariable = new HttpHeaders().set('Content-Type', 'application/json');
  public identidad;
  public token;
